@@ -52,12 +52,13 @@ class LibraryManager
   # - число полных дней, нак которые необходимо опоздать со здачей, чтобы пеня была равна стоимости книги.
   def days_to_bye price
     # решение пишем тут
-
-
-
+    percentage = price * 0.01
+    fatal_days = price / percentage 
+    return  fatal_days.to_i
 
   end
-
+  reader = LibraryManager.new
+  reader.days_to_bye(25)
 
   # 4. Для удобства иностранных пользователей, имена авторов книг на украинском языке нужно переводить в транслит. Транслитерацию должна выполняться согласно официальным правилам http://kyivpassport.com/transliteratio/
   # Входящий параметр метода 
@@ -88,4 +89,4 @@ class LibraryManager
 
 end
 reader = LibraryManager.new
-reader.could_meet_each_other?(10,20,15,22)
+#reader.could_meet_each_other?(10,20,15,22)
