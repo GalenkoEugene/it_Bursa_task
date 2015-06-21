@@ -1,4 +1,6 @@
 class LibraryManager
+  require "date"
+  #require 'active_support/all'
   # 1. Бибилиотека в один момент решила ввести жесткую систему штрафов (прямо как на rubybursa :D). За каждый час опоздания со здачей книги читатель вынужден заплатить пеню 0,1% от стоимости.  Необходимо реализовать метод, который будет считать эту сумму в зависимости от даты выдачи и текущего времени. По работе с датой-временем информацию можно посмотреть тут http://ruby-doc.org/stdlib-2.2.2/libdoc/date/rdoc/DateTime.html
   # Входящие параметры метода 
   # - стоимость книги в центах, 
@@ -10,19 +12,17 @@ class LibraryManager
     current_time = DateTime.now
     percentage = price*0.01   # пеня 0,1% от стоимости книги
     overdue_hours = (current_time.to_time - issue_datetime.to_time)/3600   # нахожу кол-во часов... криво но работает=(
-    @penalty = overdue_hours*percentage  # вычисляем сумму задолженности
+    penalty = overdue_hours*percentage  # вычисляем сумму задолженности
 
-    puts "\tYou should pay " + @penalty.to_i.to_s + " cent" + ", the limit is exceeded of " +  overdue_hours.to_i.to_s + " hours."
+    #puts "\tYou should pay " + penalty.to_i.to_s + " cent" + ", the limit is exceeded of " +  overdue_hours.to_i.to_s + " hours."
 
   end
   #-----------------------------------------------------------------------
-  
-  require "date"
-  return_time = DateTime.now
-  return_time -= 2
+  #require "date"
+  #return_time = DateTime.now
+  #return_time -= 2
   #reader.penalty(250, return_time)
   #-----------------------------------------------------------------------
-
 
   # 2. Известны годы жизни двух писателей. Год рождения, год смерти. Посчитать, могли ли они чисто теоретически встретиться. Даже если один из писателей был в роддоме - это все равно считается встречей. Помните, что некоторые писатели родились и умерли до нашей эры - в таком случае годы жизни будут просто приходить со знаком минус.
   # Входящие параметры метода 
@@ -117,10 +117,23 @@ class LibraryManager
   # - Пеня в центах или 0 при условии что читатель укладывается в срок здачи.
   def penalty_to_finish price, issue_datetime, pages_quantity, current_page, reading_speed
     # решение пишем тут
+    current_time = DateTime.now
+    percentage = price*0.01   # пеня 0,1% от стоимости книги
+    rest_page = pages_quantity - current_page #кол-во оставшихся страниц
+    hours_rest = (issue_datetime.to_time - current_time.to_time)/3600 # запас времени
+    reading_hours = rest_page / reading_speed #Кол-во чтение-часов
+    
+    if reading_hours <= reading_hours
+      return(0)
+         else
+          penalty = ((reading_hours - hours_rest) * percentage)*to_i
 
+    end
 
   end
 
 end
 reader = LibraryManager.new
+
+#reader.penalty(250, "2015-06-15 22:23:59", 500, 150, 3)
 #reader.could_meet_each_other?(10,20,15,22)
