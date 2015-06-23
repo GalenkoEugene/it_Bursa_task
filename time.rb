@@ -1,4 +1,6 @@
 require "date"
 
-date_now = DateTime.now.new_offset
+date_now = Time.now
 puts date_now
+puts date_now.monday?
+puts date_now.day 

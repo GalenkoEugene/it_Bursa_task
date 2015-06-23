@@ -133,7 +133,10 @@ class LibraryManager
   end
 
 end
+#************************************************************
 reader = LibraryManager.new
-
-#reader.penalty(250, "2015-06-15 22:23:59", 500, 150, 3)
+time = DateTime.new(2017,03,02)
+print reader.penalty_to_finish(1400, time, 348, 25, 5)
+#************************************************************
+# => reader.penalty(250, "2015-06-15 22:23:59", 500, 150, 3)
 #reader.could_meet_each_other?(10,20,15,22)

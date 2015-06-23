@@ -1,0 +1,4 @@
+require "date"
+
+date_now = DateTime.now
+puts date_now
